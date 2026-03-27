@@ -1,7 +1,8 @@
-import pymysql
-from pymysql.cursors import DictCursor
 
-DB_CONFIG = {
+import pymysql                                                                                                                     
+from pymysql.cursors import DictCursor                                                                                             
+                                                                                                                                   
+DB_CONFIG = {                                             
     "host": "localhost",
     "user": "dullknife",
     "password": "Dullkn1fe!",
@@ -16,4 +17,3 @@ def get_db():
         yield connection
     finally:
         connection.close()
-

@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Request, Depends, Query    
+from fastapi import APIRouter, Request, Depends, Query
 from fastapi.templating import Jinja2Templates
 from typing import Optional
 from database import get_db
@@ -57,4 +57,3 @@ def member_directory(
         "selected_discipline": discipline_id,
         "search": search or ""
     })
-
