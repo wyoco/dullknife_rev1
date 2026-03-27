@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dullknife - Manage Users</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo"><a href="/">Dullknife</a></div>
+            <ul>
+                <li><a href="/admin">Admin Panel</a></li>
+                <li><a href="/admin/logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Manage Users</h1>
+
+        <section class="admin-section">
+            <h2>Select User</h2>
+            <form method="get" action="/admin/edit-user">
+                <div class="form-group">
+                    <label>All Users</label>
+                    <select name="member_id">
+                        {% for u in all_users %}
+                        <option value="{{ u.id }}">{{ u.username }} — {{ u.email }} ({{ u.member_type }})</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-buttons">
+                    <button type="submit">Select User</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="admin-section">
+            <h2>Search Users</h2>
+            <form method="get" action="/admin/manage-users">
+                <div class="form-group">
+                    <input type="text" name="search" value="{{ search or '' }}" placeholder="Name, email, discipline, skills, notes...">
+                </div>
+                <div class="form-buttons">
+                    <button type="submit">Search</button>
+                    <a href="/admin/manage-users" class="button">Clear</a>
+                </div>
+            </form>
+            {% if search_results is not none %}
+            {% if search_results %}
+            <form method="get" action="/admin/edit-user">
+                <div class="form-group">
+                    <label>Search Results</label>
+                    <select name="member_id">
+                        {% for u in search_results %}
+                        <option value="{{ u.id }}">{{ u.username }} — {{ u.email }} ({{ u.member_type }})</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-buttons">
+                    <button type="submit">Select User</button>
+                </div>
+            </form>
+            {% else %}
+            <p>No results found.</p>
+            {% endif %}
+            {% endif %}
+        </section>
+
+        <div class="form-buttons">
+            <a href="/admin" class="button">Exit</a>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2026 Dullknife</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dullknife - Send Group Email</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo"><a href="/">Dullknife</a></div>
+            <ul>
+                <li><a href="/admin">Admin Panel</a></li>
+                <li><a href="/admin/logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Send Group Email</h1>
+        {% if sent %}
+        <p class="success">Group email sent to all Current Members.</p>
+        <div class="form-buttons">
+            <a href="/admin" class="button">Return to Admin Panel</a>
+        </div>
+        {% else %}
+        <form method="post" action="/admin/group-email">
+            <div class="form-group">
+                <label>Subject *</label>
+                <input type="text" name="subject" required autofocus>
+            </div>
+            <div class="form-group">
+                <label>Message *</label>
+                <textarea name="message" rows="10" required></textarea>
+            </div>
+            <div class="form-buttons">
+                <button type="submit">Send</button>
+                <a href="/admin" class="button">Cancel</a>
+            </div>
+        </form>
+        {% endif %}
+    </main>
+    <footer>
+        <p>&copy; 2026 Dullknife</p>
+    </footer>
+</body>
+</html>

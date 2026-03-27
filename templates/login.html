@@ -9,10 +9,10 @@
 <body>
     <header>
         <nav>
-            <div class="logo">Dullknife</div>
+            <div class="logo"><a href="/">Dullknife</a></div>
             <ul>
                 <li><a href="/directory">Member Directory</a></li>
-                <li><a href="/login">Member Login</a></li>
+                <li>{% if request.cookies.get("member_id") %}<a href="/logout">Logout</a>{% else %}<a href="/login">Member Login</a>{% endif %}</li>
                 <li><a href="/apply">Apply for Membership</a></li>
                 <li><a href="/about">About Us</a></li>
             </ul>

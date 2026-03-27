@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dullknife - Administration Login</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo"><a href="/">Dullknife</a></div>
+            <ul>
+                <li><a href="/">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Administration Login</h1>
+        {% if error %}
+        <p class="error">{{ error }}</p>
+        {% endif %}
+        {% if warning %}
+        <p class="warning">{{ warning }}</p>
+        {% endif %}
+        <form method="post" action="/admin/login">
+            <div class="form-group">
+                <label>Username *</label>
+                <input type="text" name="username" required autofocus>
+            </div>
+            <div class="form-group">
+                <label>Password *</label>
+                <input type="password" name="password" required>
+            </div>
+            <div class="form-buttons">
+                <button type="submit">Login</button>
+                <a href="/" class="button">Cancel</a>
+            </div>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2026 Dullknife</p>
+    </footer>
+</body>
+</html>

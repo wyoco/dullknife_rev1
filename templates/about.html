@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dullknife - About Us</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo"><a href="/">Dullknife</a></div>
+            <ul>
+                <li><a href="/directory">Member Directory</a></li>
+                <li>{% if request.cookies.get("member_id") %}<a href="/logout">Logout</a>{% else %}<a href="/login">Member Login</a>{% endif %}</li>
+                <li><a href="/apply">Apply for Membership</a></li>
+                <li><a href="/about">About Us</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>About Us</h1>
+        <section class="about-section">
+            <h2>Mission Statement</h2>
+            <p>Dullknife will serve as a public-facing front end for a development group based in the United States of America with a central office in the State of Wyoming.</p>
+            <p>Dullknife will consist of an alliance of developers seeking to build relevance through group identity.</p>
+            <p>Dullknife also seeks to empower Wyoming resident developers and Wyoming expatriate developers, serving as a resource for collaboration and knowledge sharing.</p>
+        </section>
+        <section class="about-section">
+            <h2>Legal</h2>
+            <p>All content on this site is the property of Dullknife and its respective members. Unauthorized reproduction or distribution is prohibited.</p>
+            <p>Member contact information is protected and will not be disclosed to third parties. Contact forms relay messages without exposing personal details.</p>
+        </section>
+        <div class="form-buttons">
+            <a href="/contact" class="button">Contact Us</a>
+            <a href="/" class="button">Exit</a>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2026 Dullknife</p>
+    </footer>
+</body>
+</html>

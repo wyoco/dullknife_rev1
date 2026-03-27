@@ -7,3 +7,20 @@
   nav ul a:hover { text-decoration: underline; }
   main { padding: 3rem 2rem; }
   footer { background: #2c3e50; color: white; text-align: center; padding: 1rem; margin-top: 2rem; }
+  .logo a { color: inherit; text-decoration: none; }
+  .disciplines { display: flex; flex-direction: column; gap: 0.4rem; }
+  .checkbox-label { display: flex; align-items: center; gap: 0.5rem; font-weight: normal; }
+  .about-section { margin-bottom: 2rem; }
+  .about-section h2 { margin-bottom: 0.75rem; }
+  .about-section p { margin-bottom: 0.75rem; line-height: 1.6; }
+  .success { color: #27ae60; margin-bottom: 1rem; font-weight: bold; }
+  .error { color: #c0392b; margin-bottom: 1rem; font-weight: bold; }
+  .warning { color: #e67e22; margin-bottom: 1rem; font-weight: bold; }
+  .success { color: #27ae60; margin-bottom: 1rem; font-weight: bold; }
+  .strength-weak { color: #c0392b; font-weight: bold; }
+  .strength-medium { color: #e67e22; font-weight: bold; }
+  .strength-hard { color: #27ae60; font-weight: bold; }
+  .admin-menu { display: flex; flex-direction: column; gap: 1rem; max-width: 300px; }
+  .admin-btn { display: block; text-align: center; padding: 0.75rem; font-size: 1.1rem; }
+  .admin-section { margin-bottom: 2rem; }
+  .admin-section h2 { margin-bottom: 0.75rem; }
