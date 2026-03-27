@@ -1,0 +1,9 @@
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: Arial, sans-serif; }
+  header { background: #2c3e50; color: white; padding: 1rem 2rem; }
+  nav { display: flex; justify-content: space-between; align-items: center; }
+  nav ul { list-style: none; display: flex; gap: 1.5rem; }
+  nav ul a { color: white; text-decoration: none; }
+  nav ul a:hover { text-decoration: underline; }
+  main { padding: 3rem 2rem; }
+  footer { background: #2c3e50; color: white; text-align: center; padding: 1rem; margin-top: 2rem; }
