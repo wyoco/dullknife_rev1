@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dullknife - Apply for Membership</title>
     <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="icon" href="/static/favicon.ico">
 </head>
 <body>
     <header>
         <nav>
-            <div class="logo"><a href="/">Dullknife</a></div>
+            <div class="logo"><a href="/"><img src="/static/images/jackRound.jpg" alt="Dullknife" class="nav-logo"></a></div>
             <ul>
                 <li><a href="/directory">Member Directory</a></li>
                 <li>
@@ -32,6 +33,7 @@
     </header>
     <main>
         <h1>Apply for Membership</h1>
+        <p class="apply-intro">Welcome. Please fill out the membership application form and click 'Submit', you will be informed of your acceptance shortly using the email you provide below.</p>
         {% if error %}
         <p class="error">{{ error }}</p>
         {% endif %}
@@ -118,7 +120,7 @@
                 </div>
             </div>
             <div class="form-buttons">
-                <button type="submit">Submit Application</button>
+                <button type="submit">Submit</button>
                 <a href="/" class="button">Cancel</a>
             </div>
         </form>

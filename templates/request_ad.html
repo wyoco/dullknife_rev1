@@ -5,15 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dullknife - Request Advertising</title>
     <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="icon" href="/static/favicon.ico">
 </head>
 <body>
-    <header>
+        <header>
         <nav>
-            <div class="logo"><a href="/">Dullknife</a></div>
+            <div class="logo"><a href="/"><img src="/static/images/jackRound.jpg" alt="Dullknife" class="nav-logo"></a></div>
             <ul>
                 <li><a href="/directory">Member Directory</a></li>
-                <li><a href="/member">My Page</a></li>
-                <li><a href="/logout">Logout</a></li>
+                <li>
+                    <details class="nav-dropdown">
+                        <summary>My Account &#9662;</summary>
+                        <ul>
+                            <li><a href="/member">My Page</a></li>
+                            <li><a href="/logout">Logout</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li><a href="/about">About Us</a></li>
             </ul>
         </nav>
     </header>

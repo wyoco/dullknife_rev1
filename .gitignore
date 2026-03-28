@@ -3,4 +3,5 @@ __pycache__/
 *.pyo
 *.backup
 .env
-static/images/
+static/images/*
+!static/images/jackRound.jpg
