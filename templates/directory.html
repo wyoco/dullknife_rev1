@@ -33,14 +33,14 @@
     </header>
     <main>
         <h1 class="directory-title">Member Directory</h1>
-        <p class="search-instructions">To search you can select a radio button, or multiple radio buttons and click 'Search'. Or, you can enter search terms in the 'Search Skills' search box — searches member skills, name, and city. Or, you can do both.</p>
+        <p class="search-instructions">To search you can select one or more disciplines and click 'Search'. Or, you can enter search terms in the 'Search Skills' search box — searches member skills, name, and city. Or, you can do both.</p>
         <form method="get" action="/directory" class="search-form">
             <h2>Disciplines</h2>
             <div class="disciplines-list">
                 {% for discipline in disciplines %}
                 <label>
-                    <input type="radio" name="discipline_id" value="{{ discipline.id }}"
-                    {% if selected_discipline == discipline.id %}checked{% endif %}>
+                    <input type="checkbox" name="discipline_id" value="{{ discipline.id }}"
+                    {% if discipline.id in selected_disciplines %}checked{% endif %}>
                     {{ discipline.name }}
                 </label>
                 {% endfor %}

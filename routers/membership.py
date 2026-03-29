@@ -4,6 +4,7 @@ from fastapi.responses import RedirectResponse
 from typing import Optional, List
 from database import get_db
 from routers.auth import US_STATES
+from utils.email import send_email, ADMIN_EMAIL
 
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")
@@ -44,18 +45,24 @@ def apply_submit(
     phone_1: str = Form(...),
     phone_2: Optional[str] = Form(None),
     skills_summary: str = Form(...),
-    discipline_ids: List[int] = Form(...)
+    discipline_ids: List[int] = Form(default=[])
 ):
+    def render_error(msg):
+        return templates.TemplateResponse("apply.html", {
+            "request": request,
+            "disciplines": get_disciplines(db),
+            "wy_cities": get_wy_cities(db),
+            "us_states": US_STATES,
+            "error": msg
+        })
+
+    if not discipline_ids:
+        return render_error("Please select at least one discipline.")
+
     with db.cursor() as cursor:
         cursor.execute("SELECT id FROM members WHERE username = %s", (username,))
         if cursor.fetchone():
-            return templates.TemplateResponse("apply.html", {
-                "request": request,
-                "disciplines": get_disciplines(db),
-                "wy_cities": get_wy_cities(db),
-                "us_states": US_STATES,
-                "error": f"Username '{username}' is already taken. Please choose another."
-            })
+            return render_error(f"Username '{username}' is already taken. Please choose another.")
         cursor.execute("""
             INSERT INTO members
              (username, email, password_hash, member_type, first_name, middle_name,
@@ -70,6 +77,21 @@ def apply_submit(
                 VALUES (%s, %s)
             """, (member_id, discipline_id))
         db.commit()
+
+    # Notify admin
+    subject = f"New Membership Application — {first_name} {last_name}"
+    body = f"""A new membership application has been submitted.
+
+Name:     {first_name} {last_name}
+Username: {username}
+Email:    {email}
+City:     {city}, {state} {zipcode}
+Phone:    {phone_1}
+
+Review and approve at https://www.dullknife.com/admin/users
+"""
+    send_email(ADMIN_EMAIL, subject, body)
+
     return RedirectResponse(url="/apply/thankyou", status_code=303)
 
 @router.get("/apply/thankyou")

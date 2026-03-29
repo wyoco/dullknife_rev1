@@ -116,10 +116,10 @@ def manage_users(request: Request, db=Depends(get_db), search: Optional[str] = N
                 FROM members m
                 LEFT JOIN member_disciplines md ON m.id = md.member_id
                 LEFT JOIN disciplines d ON md.discipline_id = d.id
-                WHERE m.first_name LIKE %s OR m.last_name LIKE %s OR m.email LIKE %s
+                WHERE m.username LIKE %s OR m.first_name LIKE %s OR m.last_name LIKE %s OR m.email LIKE %s
                 OR m.skills_summary LIKE %s OR m.admin_notes LIKE %s OR d.name LIKE %s
                 ORDER BY m.member_type, m.username
-            """, (like, like, like, like, like, like))
+            """, (like, like, like, like, like, like, like))
             search_results = cursor.fetchall()
     return templates.TemplateResponse("admin_manage_users.html", {
         "request": request, "all_users": all_users, "search": search, "search_results": search_results
@@ -177,20 +177,17 @@ def edit_user_submit(
         return RedirectResponse(url="/admin/login", status_code=303)
 
     if action == "approve":
-        member_type = "current"
         with db.cursor() as cursor:
-            cursor.execute("SELECT email FROM members WHERE id = %s", (member_id,))
+            cursor.execute("SELECT email, first_name, username FROM members WHERE id = %s", (member_id,))
             row = cursor.fetchone()
-        print(f"[APPROVE] Member {member_id} approved. Temp password email → {row['email']}", flush=True)
-        # TODO: send approval email with temp password when SMTP configured
+        send_approval_email(row["email"], row["first_name"], row["username"])
         final_type = "current"
         pw_hash = "temporary"
     elif action == "reject":
         with db.cursor() as cursor:
-            cursor.execute("SELECT email FROM members WHERE id = %s", (member_id,))
+            cursor.execute("SELECT email, first_name FROM members WHERE id = %s", (member_id,))
             row = cursor.fetchone()
-        print(f"[REJECT] Member {member_id} rejected. Email → {row['email']}", flush=True)
-        # TODO: send rejection email when SMTP configured
+        send_rejection_email(row["email"], row["first_name"])
         final_type = "applicant"
         pw_hash = None
     else:
